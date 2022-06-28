@@ -88,7 +88,8 @@ for (let i = 0; i < secondTable.rows.length; i++){
     if(i>0){
         var rowsColvalue = secondTable.rows.item(i).cells
         var country = rowsColvalue.item(1).innerHTML
-        countryList.push(country)
+                countryList.push(country)
+
         var celoneVal = rowsColvalue.item(2).innerHTML
         xAxis.push(celoneVal)
         var celScndVal = rowsColvalue.item(3).innerHTML
@@ -152,3 +153,56 @@ const myChart = new Chart(ctx, {
         }
     }
 });
+
+function getRandomIntInclusive(min, max) {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+  }
+  var livechart = document.getElementById("updatechart");
+  var newchart = new Chart(livechart, {
+    type: 'line',
+    data: {
+      labels: [],
+      datasets: [{
+        data: [],
+        borderWidth: 1,
+        borderColor:'orange',
+        backgroundColor:"pink",
+        label: 'live update chart',
+      }]
+    },
+    options: {
+      responsive: true,
+      title: {
+        display: true,
+      },
+      legend: {
+        display: false
+      },
+      scales: {
+        yAxes: [{
+          ticks: {
+            beginAtZero: true,
+          }
+        }]
+      }
+    }
+  });
+  var postId = 1;
+  var getData = function() {
+    $.ajax({
+      url: 'https://canvasjs.com/services/data/datapoints.php',
+      success: function(data) {
+        newchart.data.labels.push("value " + postId++);
+        newchart.data.datasets[0].data.push(getRandomIntInclusive(1, 25));
+        newchart.update();
+      }
+    });
+  };
+  
+  setInterval(getData, 3000);
+  
+      
+  
+
