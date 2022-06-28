@@ -189,12 +189,12 @@ function getRandomIntInclusive(min, max) {
       }
     }
   });
-  var postId = 1;
+  var increase = 1;
   var getData = function() {
     $.ajax({
       url: 'https://canvasjs.com/services/data/datapoints.php',
       success: function(data) {
-        newchart.data.labels.push("value " + postId++);
+        newchart.data.labels.push("value " + increase++);
         newchart.data.datasets[0].data.push(getRandomIntInclusive(1, 25));
         newchart.update();
       }
