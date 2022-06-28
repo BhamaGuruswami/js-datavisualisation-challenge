@@ -201,7 +201,7 @@ function getRandomIntInclusive(min, max) {
     });
   };
   
-  setInterval(getData, 3000);
+  setInterval(getData, 1000);
   
       
   
